@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { Menu, X, ChevronDown, User, LogOut, BookOpen, Search } from "lucide-react";
@@ -60,7 +59,12 @@ const Navbar = () => {
           {/* Logo */}
           <div className="flex items-center">
             <Link to="/" className="flex items-center">
-              <span className="text-2xl font-bold text-primary">EduVerse</span>
+              <img 
+                src="/lovable-uploads/06319f5f-4518-41dc-b801-8e4b4f24ab10.png" 
+                alt="KnowledgeHub Logo" 
+                className="h-10 w-10 mr-2" 
+              />
+              <span className="text-2xl font-bold text-primary">KnowledgeHub</span>
             </Link>
           </div>
 

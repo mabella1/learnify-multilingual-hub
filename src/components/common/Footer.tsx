@@ -11,8 +11,13 @@ const Footer = () => {
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           <div>
-            <Link to="/" className="text-2xl font-bold text-white">
-              EduVerse
+            <Link to="/" className="flex items-center">
+              <img 
+                src="/lovable-uploads/06319f5f-4518-41dc-b801-8e4b4f24ab10.png" 
+                alt="KnowledgeHub Logo" 
+                className="h-10 w-10 mr-2" 
+              />
+              <span className="text-2xl font-bold text-white">KnowledgeHub</span>
             </Link>
             <p className="mt-4 text-gray-400">
               Empowering learners worldwide with high-quality education and skills development.
@@ -95,7 +100,7 @@ const Footer = () => {
         
         <div className="border-t border-gray-800 mt-12 pt-8 flex flex-col md:flex-row justify-between items-center">
           <p className="text-gray-400">
-            &copy; {currentYear} EduVerse. All rights reserved.
+            &copy; {currentYear} KnowledgeHub. All rights reserved.
           </p>
           
           <div className="flex space-x-6 mt-4 md:mt-0">

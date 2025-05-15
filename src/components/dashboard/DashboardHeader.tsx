@@ -34,7 +34,7 @@ const DashboardHeader = () => {
           variant="ghost" 
           size="icon" 
           className="md:hidden"
-          onClick={toggleMobileSidebar}
+          onClick={toggleMobileSidebarOpen}
         >
           <Menu className="h-5 w-5" />
         </Button>
