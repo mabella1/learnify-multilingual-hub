@@ -1,7 +1,6 @@
-
 import { useState } from "react";
 import { useParams, Link } from "react-router-dom";
-import { Play, Users, Star, Clock, Globe, Award, Check, ChevronDown, ChevronUp } from "lucide-react";
+import { Play, Users, Star, Clock, Globe, Award, Check, ChevronDown, ChevronUp, FileText } from "lucide-react";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";

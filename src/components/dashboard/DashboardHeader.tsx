@@ -1,6 +1,6 @@
 
 import { useState } from "react";
-import { Menu, Bell, User } from "lucide-react";
+import { Menu, Bell, User, Settings, LogOut } from "lucide-react";
 import { useAuth } from "@/context/AuthContext";
 import { useLanguage } from "@/context/LanguageContext";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
