@@ -19,7 +19,7 @@ const HomePage = () => {
           <div className="max-w-3xl hero-animation">
             <div className="flex items-center mb-6">
               <img 
-                src="/lovable-uploads/06319f5f-4518-41dc-b801-8e4b4f24ab10.png" 
+                src="/lovable-uploads/540172cc-3ce4-4979-bece-e843a24a3cac.png" 
                 alt="KnowledgeHub Logo" 
                 className="h-16 w-16 mr-4" 
               />
