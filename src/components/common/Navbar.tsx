@@ -18,10 +18,12 @@ import LanguageSwitcher from "./LanguageSwitcher";
 
 const Navbar = () => {
   const { currentUser, isAuthenticated, logout } = useAuth();
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
   const navigate = useNavigate();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
+
+  const isRTL = language === "ar";
 
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault();
@@ -83,11 +85,12 @@ const Navbar = () => {
               <Input
                 type="search"
                 placeholder={t("common.search")}
-                className="w-64 pl-9"
+                className={`w-64 ${isRTL ? 'pr-9 pl-3' : 'pl-9 pr-3'}`}
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
+                dir={isRTL ? 'rtl' : 'ltr'}
               />
-              <Search className="absolute left-2 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
+              <Search className={`absolute top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground ${isRTL ? 'right-2' : 'left-2'}`} />
             </form>
           </nav>
 
@@ -105,29 +108,33 @@ const Navbar = () => {
                     </Avatar>
                   </Button>
                 </DropdownMenuTrigger>
-                <DropdownMenuContent align="end" className="w-56">
-                  <div className="flex items-center justify-start gap-2 p-2">
-                    <div className="flex flex-col space-y-1 leading-none">
+                <DropdownMenuContent 
+                  align={isRTL ? "start" : "end"} 
+                  className="w-56 bg-background border border-border shadow-lg"
+                  dir={isRTL ? 'rtl' : 'ltr'}
+                >
+                  <div className={`flex items-center justify-start gap-2 p-2 ${isRTL ? 'flex-row-reverse' : ''}`}>
+                    <div className={`flex flex-col space-y-1 leading-none ${isRTL ? 'text-right' : 'text-left'}`}>
                       <p className="font-medium">{currentUser?.name}</p>
                       <p className="text-sm text-muted-foreground">{currentUser?.email}</p>
                     </div>
                   </div>
                   <DropdownMenuSeparator />
                   <DropdownMenuItem asChild>
-                    <Link to={getDashboardUrl()} className="cursor-pointer w-full flex items-center">
-                      <BookOpen className="mr-2 h-4 w-4" />
+                    <Link to={getDashboardUrl()} className={`cursor-pointer w-full flex items-center ${isRTL ? 'flex-row-reverse' : ''}`}>
+                      <BookOpen className={`h-4 w-4 ${isRTL ? 'ml-2' : 'mr-2'}`} />
                       <span>{t("common.dashboard")}</span>
                     </Link>
                   </DropdownMenuItem>
                   <DropdownMenuItem asChild>
-                    <Link to="/dashboard/profile" className="cursor-pointer w-full flex items-center">
-                      <User className="mr-2 h-4 w-4" />
+                    <Link to="/dashboard/profile" className={`cursor-pointer w-full flex items-center ${isRTL ? 'flex-row-reverse' : ''}`}>
+                      <User className={`h-4 w-4 ${isRTL ? 'ml-2' : 'mr-2'}`} />
                       <span>{t("common.profile")}</span>
                     </Link>
                   </DropdownMenuItem>
                   <DropdownMenuSeparator />
-                  <DropdownMenuItem onClick={handleLogout} className="cursor-pointer">
-                    <LogOut className="mr-2 h-4 w-4" />
+                  <DropdownMenuItem onClick={handleLogout} className={`cursor-pointer ${isRTL ? 'flex-row-reverse' : ''}`}>
+                    <LogOut className={`h-4 w-4 ${isRTL ? 'ml-2' : 'mr-2'}`} />
                     <span>{t("common.logout")}</span>
                   </DropdownMenuItem>
                 </DropdownMenuContent>
@@ -159,17 +166,18 @@ const Navbar = () => {
 
       {/* Mobile Menu */}
       {isMenuOpen && (
-        <div className="md:hidden border-t">
+        <div className={`md:hidden border-t bg-background ${isRTL ? 'text-right' : 'text-left'}`} dir={isRTL ? 'rtl' : 'ltr'}>
           <div className="container mx-auto px-4 py-4 space-y-4">
             <form onSubmit={handleSearch} className="relative mb-4">
               <Input
                 type="search"
                 placeholder={t("common.search")}
-                className="w-full pl-9"
+                className={`w-full ${isRTL ? 'pr-9 pl-3' : 'pl-9 pr-3'}`}
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
+                dir={isRTL ? 'rtl' : 'ltr'}
               />
-              <Search className="absolute left-2 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
+              <Search className={`absolute top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground ${isRTL ? 'right-2' : 'left-2'}`} />
             </form>
             
             <Link 
@@ -190,12 +198,12 @@ const Navbar = () => {
             <div className="border-t pt-4">
               {isAuthenticated ? (
                 <div className="space-y-3">
-                  <div className="flex items-center space-x-3">
+                  <div className={`flex items-center space-x-3 ${isRTL ? 'flex-row-reverse space-x-reverse' : ''}`}>
                     <Avatar>
                       <AvatarImage src={currentUser?.avatar} alt={currentUser?.name} />
                       <AvatarFallback>{currentUser?.name.charAt(0)}</AvatarFallback>
                     </Avatar>
-                    <div>
+                    <div className={isRTL ? 'text-right' : 'text-left'}>
                       <p className="font-medium">{currentUser?.name}</p>
                       <p className="text-sm text-muted-foreground">{currentUser?.email}</p>
                     </div>
