@@ -110,10 +110,9 @@ const Navbar = () => {
                 </DropdownMenuTrigger>
                 <DropdownMenuContent 
                   align={isRTL ? "start" : "end"} 
-                  className="w-56 bg-background border border-border shadow-lg"
-                  dir={isRTL ? 'rtl' : 'ltr'}
+                  className={`w-56 bg-background border border-border shadow-lg ${isRTL ? 'text-right' : 'text-left'}`}
                 >
-                  <div className={`flex items-center justify-start gap-2 p-2 ${isRTL ? 'flex-row-reverse' : ''}`}>
+                  <div className={`flex items-center justify-start gap-2 p-2 ${isRTL ? 'flex-row-reverse' : ''}`} dir={isRTL ? 'rtl' : 'ltr'}>
                     <div className={`flex flex-col space-y-1 leading-none ${isRTL ? 'text-right' : 'text-left'}`}>
                       <p className="font-medium">{currentUser?.name}</p>
                       <p className="text-sm text-muted-foreground">{currentUser?.email}</p>
