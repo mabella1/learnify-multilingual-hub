@@ -72,7 +72,7 @@ const Navbar = () => {
           </div>
 
           {/* Desktop Navigation */}
-          <nav className="hidden md:flex items-center space-x-8">
+          <nav className={`hidden md:flex items-center ${isRTL ? 'space-x-reverse space-x-8' : 'space-x-8'}`}>
             <Link to="/" className="text-foreground hover:text-primary transition-colors">
               {t("common.home")}
             </Link>
@@ -95,7 +95,7 @@ const Navbar = () => {
           </nav>
 
           {/* Right side - Auth & Language */}
-          <div className="hidden md:flex items-center space-x-4">
+          <div className={`hidden md:flex items-center ${isRTL ? 'space-x-reverse space-x-4' : 'space-x-4'}`}>
             <LanguageSwitcher />
             
             {isAuthenticated ? (
@@ -139,7 +139,7 @@ const Navbar = () => {
                 </DropdownMenuContent>
               </DropdownMenu>
             ) : (
-              <div className="flex items-center space-x-2">
+              <div className={`flex items-center ${isRTL ? 'space-x-reverse space-x-2' : 'space-x-2'}`}>
                 <Button variant="ghost" asChild>
                   <Link to="/login">{t("common.login")}</Link>
                 </Button>
@@ -166,12 +166,12 @@ const Navbar = () => {
       {/* Mobile Menu */}
       {isMenuOpen && (
         <div className={`md:hidden border-t bg-background ${isRTL ? 'text-right' : 'text-left'}`} dir={isRTL ? 'rtl' : 'ltr'}>
-          <div className="container mx-auto px-4 py-4 space-y-4">
+          <div className={`container mx-auto px-4 py-4 space-y-4 ${isRTL ? 'text-right' : 'text-left'}`}>
             <form onSubmit={handleSearch} className="relative mb-4">
               <Input
                 type="search"
                 placeholder={t("common.search")}
-                className={`w-full ${isRTL ? 'pr-9 pl-3' : 'pl-9 pr-3'}`}
+                className={`w-full ${isRTL ? 'pr-9 pl-3 text-right' : 'pl-9 pr-3 text-left'}`}
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 dir={isRTL ? 'rtl' : 'ltr'}
@@ -181,14 +181,14 @@ const Navbar = () => {
             
             <Link 
               to="/" 
-              className="block py-2 text-foreground hover:text-primary"
+              className={`block py-3 px-2 text-foreground hover:text-primary hover:bg-muted/50 rounded-md transition-colors ${isRTL ? 'text-right' : 'text-left'}`}
               onClick={() => setIsMenuOpen(false)}
             >
               {t("common.home")}
             </Link>
             <Link 
               to="/courses" 
-              className="block py-2 text-foreground hover:text-primary"
+              className={`block py-3 px-2 text-foreground hover:text-primary hover:bg-muted/50 rounded-md transition-colors ${isRTL ? 'text-right' : 'text-left'}`}
               onClick={() => setIsMenuOpen(false)}
             >
               {t("common.courses")}
@@ -197,7 +197,7 @@ const Navbar = () => {
             <div className="border-t pt-4">
               {isAuthenticated ? (
                 <div className="space-y-3">
-                  <div className={`flex items-center space-x-3 ${isRTL ? 'flex-row-reverse space-x-reverse' : ''}`}>
+                  <div className={`flex items-center gap-3 p-2 ${isRTL ? 'flex-row-reverse' : ''}`}>
                     <Avatar>
                       <AvatarImage src={currentUser?.avatar} alt={currentUser?.name} />
                       <AvatarFallback>{currentUser?.name.charAt(0)}</AvatarFallback>
@@ -210,14 +210,14 @@ const Navbar = () => {
                   
                   <Link 
                     to={getDashboardUrl()}
-                    className="block py-2 text-foreground hover:text-primary"
+                    className={`block py-3 px-2 text-foreground hover:text-primary hover:bg-muted/50 rounded-md transition-colors ${isRTL ? 'text-right' : 'text-left'}`}
                     onClick={() => setIsMenuOpen(false)}
                   >
                     {t("common.dashboard")}
                   </Link>
                   <Link 
                     to="/dashboard/profile" 
-                    className="block py-2 text-foreground hover:text-primary"
+                    className={`block py-3 px-2 text-foreground hover:text-primary hover:bg-muted/50 rounded-md transition-colors ${isRTL ? 'text-right' : 'text-left'}`}
                     onClick={() => setIsMenuOpen(false)}
                   >
                     {t("common.profile")}
@@ -227,19 +227,19 @@ const Navbar = () => {
                       handleLogout();
                       setIsMenuOpen(false);
                     }} 
-                    className="block w-full text-left py-2 text-foreground hover:text-primary"
+                    className={`block w-full py-3 px-2 text-foreground hover:text-primary hover:bg-muted/50 rounded-md transition-colors ${isRTL ? 'text-right' : 'text-left'}`}
                   >
                     {t("common.logout")}
                   </button>
                 </div>
               ) : (
-                <div className="flex flex-col space-y-2">
-                  <Button asChild variant="outline">
+                <div className={`flex flex-col space-y-2 ${isRTL ? 'items-end' : 'items-start'}`}>
+                  <Button asChild variant="outline" className="w-full">
                     <Link to="/login" onClick={() => setIsMenuOpen(false)}>
                       {t("common.login")}
                     </Link>
                   </Button>
-                  <Button asChild>
+                  <Button asChild className="w-full">
                     <Link to="/register" onClick={() => setIsMenuOpen(false)}>
                       {t("common.register")}
                     </Link>
