@@ -1,7 +1,7 @@
 
 import { Link } from "react-router-dom";
 import { Users, Star } from "lucide-react";
-import { Card, CardContent, CardFooter } from "@/components/ui/card";
+import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
 
@@ -15,8 +15,8 @@ export interface CourseProps {
   price: number;
   category: string;
   level: string;
-  progress?: number; // Optional for enrolled courses
-  language?: string; // Optional field for language
+  progress?: number;
+  language?: string;
 }
 
 interface CourseCardProps {
@@ -40,61 +40,61 @@ const CourseCard = ({ course, showProgress = false }: CourseCardProps) => {
   } = course;
 
   return (
-    <Link to={`/courses/${id}`}>
-      <Card className="h-full overflow-hidden course-card">
+    <Link to={`/courses/${id}`} className="group">
+      <Card className="h-full overflow-hidden border border-gray-200 hover:shadow-lg transition-all duration-200 group-hover:-translate-y-1">
         <div className="relative aspect-video overflow-hidden">
           <img
             src={coverImage}
             alt={title}
-            className="object-cover w-full h-full transition-transform duration-300 hover:scale-105"
+            className="object-cover w-full h-full group-hover:scale-105 transition-transform duration-300"
           />
-          <div className="absolute top-2 left-2 flex gap-2">
-            <Badge variant="secondary" className="bg-black/70 text-white">
-              {level}
-            </Badge>
-            {language && (
-              <Badge variant="secondary" className="bg-black/70 text-white">
-                {language}
-              </Badge>
-            )}
-          </div>
+          {showProgress && progress !== undefined && (
+            <div className="absolute bottom-0 left-0 right-0 bg-black bg-opacity-50 p-2">
+              <Progress value={progress} className="h-1 bg-gray-300" />
+              <div className="text-white text-xs mt-1">{progress}% complete</div>
+            </div>
+          )}
         </div>
 
         <CardContent className="p-4">
           <div className="space-y-2">
-            <Badge className="mb-2">{category}</Badge>
-            <h3 className="font-semibold text-lg line-clamp-2">{title}</h3>
-            <p className="text-sm text-muted-foreground">{instructor}</p>
+            <h3 className="font-bold text-gray-900 line-clamp-2 group-hover:text-purple-600 transition-colors leading-tight">
+              {title}
+            </h3>
+            <p className="text-sm text-gray-600">{instructor}</p>
             
-            <div className="flex items-center text-sm">
+            <div className="flex items-center gap-2 text-sm">
               <div className="flex items-center">
-                <Star className="h-4 w-4 text-yellow-500 mr-1" fill="currentColor" />
-                <span>{rating.toFixed(1)}</span>
+                <span className="text-orange-500 font-semibold mr-1">{rating.toFixed(1)}</span>
+                <div className="flex">
+                  {[...Array(5)].map((_, i) => (
+                    <Star 
+                      key={i} 
+                      className={`h-3 w-3 ${i < Math.floor(rating) ? 'text-orange-500 fill-current' : 'text-gray-300'}`} 
+                    />
+                  ))}
+                </div>
               </div>
-              <div className="mx-2">•</div>
-              <div className="flex items-center">
-                <Users className="h-4 w-4 mr-1" />
-                <span>{students.toLocaleString()} students</span>
-              </div>
+              <span className="text-gray-500">({students.toLocaleString()})</span>
             </div>
 
-            {showProgress && progress !== undefined && (
-              <div className="space-y-1">
-                <div className="flex justify-between text-xs">
-                  <span>Progress</span>
-                  <span>{progress}%</span>
-                </div>
-                <Progress value={progress} className="h-2" />
+            <div className="flex items-center justify-between">
+              <div className="font-bold text-lg text-gray-900">
+                ${price.toFixed(2)}
               </div>
-            )}
+              <div className="flex gap-1">
+                <Badge variant="secondary" className="text-xs bg-yellow-100 text-yellow-800 border-yellow-200">
+                  {level}
+                </Badge>
+                {language && (
+                  <Badge variant="secondary" className="text-xs bg-blue-100 text-blue-800 border-blue-200">
+                    {language}
+                  </Badge>
+                )}
+              </div>
+            </div>
           </div>
         </CardContent>
-
-        <CardFooter className="p-4 pt-0 flex justify-between items-center">
-          <div className="font-bold text-lg">
-            ${price.toFixed(2)}
-          </div>
-        </CardFooter>
       </Card>
     </Link>
   );

@@ -73,13 +73,23 @@
   }
 
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground font-sans;
   }
 }
 
-/* Course Card Styles */
+/* Udemy-style utilities */
+@layer utilities {
+  .line-clamp-2 {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+}
+
+/* Course Card Hover Effects */
 .course-card {
-  @apply transition-transform duration-200 hover:scale-105 hover:shadow-lg;
+  @apply transition-all duration-200 hover:scale-105 hover:shadow-lg;
 }
 
 /* Hero Animation */
